@@ -1,20 +1,43 @@
-# Лабораторна робота №4
-## Мета: Навчитися пряцювати з events
+# Лабораторна робота №6
+## Мета: Робота з анімацією
 
 Дана робота є продовженням попередньої
 
-1. Створити у склонованій директорії [React проект](https://reactjs.org/docs/create-a-new-react-app.html) з назвою 'traffic-lights-5'
+1. Створити у склонованій директорії [React проект](https://reactjs.org/docs/create-a-new-react-app.html) з назвою 'traffic-lights-6'
 1. Перенести попередню лабораторну 
-1. В папці src створити папку "Pages", а в ній компоненту "Home", на якій буде висвітлюватися завдання лабораторної роботи
-1. Cтворити компоненту "Header", в якій реалізувати меню(меню має містити два пункти "Горизонтальний сфітлофор" та "Вертикальний світлофор") 
-1. В App додати компоненту "Header"
-1.  Підключти бібліотеку "react-roter-dom"; в "App" реалізувати наступні роути
+1.  При клікані на колір сфітлофора реалізувати ефект "моргання" (плюсом буде реалізація зміни яскравості кольору, кількості "моргань", тощо)
+    ```js
+    import { motion } from "framer-motion";
+    import { useEffect, useRef, useState } from "react";
+
+    export default function App() {
+      const ref = useRef(1);
+      const [isClick, setIsClick] = useState(true);
+
+      useEffect(() => {}, [isClick]);
+
+      return (
+        <motion.div
+          className="box"
+          key={ref.current}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          onClick={() => {
+            ref.current++;
+            setIsClick(!isClick);
+          }}
+        />
+      );
+    }
     ```
-    <Routs>
-      <Route path='/' element={<Home />}>
-      <Route path='/horisontal' element={<.../>}/>
-      <Route path='/vertical' element={<.../>}/>
-    </Routs>
+    ```css
+    .box {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          background: blue;
+        }
     ```
 1. Оформити звіт на локальному комп'ютері
 1. Запушити лаборатону в github.classroom
